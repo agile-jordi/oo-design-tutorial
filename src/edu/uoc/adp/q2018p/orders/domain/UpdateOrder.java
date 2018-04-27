@@ -1,9 +1,9 @@
 package edu.uoc.adp.q2018p.orders.domain;
 
 enum CancelLineResponse{
-    cancelled,
-    requested,
-    denied
+    cancellationDone,
+    cancellationRequested,
+    cancellationDenied
 }
 
 public class UpdateOrder {
