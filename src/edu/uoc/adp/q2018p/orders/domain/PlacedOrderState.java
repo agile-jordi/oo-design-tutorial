@@ -12,4 +12,9 @@ public class PlacedOrderState extends OrderState {
         order.setState(new InPreparationOrderState(order));
     }
 
+    public CancelLineResponse cancelLine(String productName) {
+        boolean removed = order.removeLine(productName);
+        if(!removed) return CancelLineResponse.cancellationDenied;
+        return CancelLineResponse.cancellationDone;
+    }
 }

@@ -8,4 +8,8 @@ public class PreparedOrderState extends OrderState {
         this.order = order;
     }
 
+    @Override
+    public CancelLineResponse cancelLine(String productName) {
+        return CancelLineResponse.cancellationDenied;
+    }
 }

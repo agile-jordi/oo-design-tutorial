@@ -11,4 +11,6 @@ public abstract class OrderState {
     void finishPreparation(List<String> cancelledLines) {
         throw new IllegalStateException();
     }
+
+    abstract CancelLineResponse cancelLine(String productName);
 }

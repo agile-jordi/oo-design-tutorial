@@ -45,4 +45,29 @@ public class Order {
     void setState(OrderState state) {
         this.state = state;
     }
+
+    CancelLineResponse cancelLine(String productName) {
+        return state.cancelLine(productName);
+    }
+
+    private OrderLine findOrderLine(String productName){
+        for(OrderLine ol : orderLines){
+            if(ol.isForProduct(productName)) return ol;
+        }
+        return null;
+    }
+
+    boolean removeLine(String productName) {
+        OrderLine ol = findOrderLine(productName);
+        if(ol == null) return false;
+        orderLines.remove(ol);
+        return true;
+    }
+
+    boolean setLineCancellationRequested(String productName) {
+        OrderLine ol = findOrderLine(productName);
+        if(ol == null) return false;
+        ol.setCancellationRequested();
+        return true;
+    }
 }

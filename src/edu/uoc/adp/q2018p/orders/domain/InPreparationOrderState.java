@@ -14,4 +14,10 @@ public class InPreparationOrderState extends OrderState {
     public void finishPreparation(List<String> cancelledLines) {
         this.order.setState(new PreparedOrderState(order));
     }
+
+    public CancelLineResponse cancelLine(String productName) {
+        boolean found = order.setLineCancellationRequested(productName);
+        if(!found) return CancelLineResponse.cancellationDenied;
+        return CancelLineResponse.cancellationRequested;
+    }
 }

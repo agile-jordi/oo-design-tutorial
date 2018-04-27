@@ -6,8 +6,9 @@ public class OrderLine {
 
     private final Product product;
     private int units;
+    private boolean cancellationRequested;
 
-    public OrderLine(Product product, int units) {
+    OrderLine(Product product, int units) {
         this.product = product;
         this.units = units;
     }
@@ -28,5 +29,9 @@ public class OrderLine {
 
     void setAmount(int newUnits) {
         this.units = newUnits;
+    }
+
+    void setCancellationRequested() {
+        this.cancellationRequested = true;
     }
 }

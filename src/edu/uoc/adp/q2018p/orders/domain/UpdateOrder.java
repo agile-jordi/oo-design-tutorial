@@ -10,13 +10,14 @@ public class UpdateOrder {
 
     private final Orders orders;
 
-    private Customer customer;
-
     public UpdateOrder(Orders orders) {
         this.orders = orders;
     }
 
     public CancelLineResponse cancelLine(String orderId, String productName){
-        // PENDENT: Dissenyar
+        Order o = orders.getOrder(orderId);
+        CancelLineResponse result = o.cancelLine(productName);
+        orders.updateOrder(o);
+        return result;
     }
 }
