@@ -15,7 +15,7 @@ public class Product {
         this.prices = new LinkedList<>();
     }
 
-    public Money getPrice(Instant at) {
+    Money getPrice(Instant at) {
         for(ProductPrice p : prices){
             if(p.getSince().isBefore(at)){
                 return p.getPrice();
@@ -24,4 +24,7 @@ public class Product {
         return null;
     }
 
+    public String getName() {
+        return name;
+    }
 }

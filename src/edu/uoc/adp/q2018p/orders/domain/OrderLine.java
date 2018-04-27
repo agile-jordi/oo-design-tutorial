@@ -17,4 +17,16 @@ public class OrderLine {
         if(productPrice == null) return null;
         return productPrice.times(units);
     }
+
+    boolean isForProduct(String productName) {
+        return product.getName().equals(productName);
+    }
+
+    void addOne() {
+        this.units += 1;
+    }
+
+    void setAmount(int newUnits) {
+        this.units = newUnits;
+    }
 }

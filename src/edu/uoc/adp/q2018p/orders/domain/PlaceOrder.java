@@ -25,13 +25,32 @@ public class PlaceOrder {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    private OrderLine findOrderLine(String productName){
+        boolean found = false;
+        for(OrderLine ol : orderLines) {
+            if (ol.isForProduct(productName)) {
+                return ol;
+            }
+        }
+        return null;
+    }
+
     public void addProduct(String productName) {
         Product p = products.getProduct(productName);
-        orderLines.add(new OrderLine(p, 1));
+        OrderLine orderLine = findOrderLine(productName);
+        if(orderLine == null){
+            orderLines.add(new OrderLine(p, 1));
+        } else {
+            orderLine.addOne();
+        }
     }
 
     public void changeProductUnits(String productName, int newUnits){
-        throw new UnsupportedOperationException("Not yet implemented");
+        OrderLine orderLine = findOrderLine(productName);
+        if(orderLine == null){
+            throw new RuntimeException("Order line not found");
+        }
+        orderLine.setAmount(newUnits);
     }
 
     public void selectDeliveryAddress(Address a){
