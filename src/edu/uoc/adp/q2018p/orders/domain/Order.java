@@ -12,6 +12,7 @@ public class Order {
     private final Address address;
     private final InstantRange deliveryWindow;
     private Instant deliveredAt;
+    private OrderState state;
 
 
     public Order(String id, Instant orderedAt, Customer customer, List<OrderLine> orderLines, Address address, InstantRange deliveryWindow) {
@@ -22,6 +23,7 @@ public class Order {
         this.address = address;
         this.deliveryWindow = deliveryWindow;
         this.deliveredAt = null;
+        this.state = new PlacedOrderState(this);
     }
 
     private Money getTotalPrice() {
@@ -30,5 +32,17 @@ public class Order {
             result = result.sum(ol.getPrice(this.orderedAt));
         }
         return result;
+    }
+
+    void startPreparation(){
+        this.state.startPreparation();
+    }
+
+    void finishPreparation(List<String> cancelledLines){
+        this.state.finishPreparation(cancelledLines);
+    }
+
+    void setState(OrderState state) {
+        this.state = state;
     }
 }
