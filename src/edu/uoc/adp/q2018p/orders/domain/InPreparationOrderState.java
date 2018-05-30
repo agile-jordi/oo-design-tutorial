@@ -12,7 +12,7 @@ public class InPreparationOrderState extends OrderState {
 
     @Override
     public void finishPreparation(List<String> cancelledLines) {
-        this.order.setState(new PreparedOrderState(order));
+        this.order.setPreparationFinished(cancelledLines);
     }
 
     public CancelLineResponse cancelLine(String productName) {

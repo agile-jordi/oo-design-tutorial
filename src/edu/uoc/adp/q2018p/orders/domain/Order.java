@@ -1,6 +1,7 @@
 package edu.uoc.adp.q2018p.orders.domain;
 
 import java.time.Instant;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Order {
@@ -8,7 +9,7 @@ public class Order {
     private final String id;
     private final Instant orderedAt;
     private final Customer customer;
-    private final List<OrderLine> orderLines;
+    private List<OrderLine> orderLines;
     private final Address address;
     private final InstantRange deliveryWindow;
     private Instant deliveredAt;
@@ -69,5 +70,21 @@ public class Order {
         if(ol == null) return false;
         ol.setCancellationRequested();
         return true;
+    }
+
+    private void removeLines(List<String> lines) {
+        List<OrderLine> resultingOrderLines = new LinkedList<>();
+        for(OrderLine ol : orderLines){
+            if(!ol.isForProductIn(lines)){
+                resultingOrderLines.add(ol);
+            }
+        }
+        this.orderLines = resultingOrderLines;
+    }
+
+    void setPreparationFinished(List<String> cancelledLines) {
+        removeLines(cancelledLines);
+        setState(new PreparedOrderState());
+
     }
 }

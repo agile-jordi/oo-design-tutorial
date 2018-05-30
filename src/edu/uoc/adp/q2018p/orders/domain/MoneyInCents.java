@@ -13,6 +13,7 @@ public class MoneyInCents implements Money{
         if(b instanceof MoneyInCents){
             return Money.fromCents(this.cents + ((MoneyInCents)b).cents);
         }
+        return Money.unknown;
     }
 
     @Override

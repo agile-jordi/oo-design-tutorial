@@ -1,6 +1,7 @@
 package edu.uoc.adp.q2018p.orders.domain;
 
 import java.time.Instant;
+import java.util.List;
 
 public class OrderLine {
 
@@ -21,6 +22,10 @@ public class OrderLine {
 
     boolean isForProduct(String productName) {
         return product.getName().equals(productName);
+    }
+
+    boolean isForProductIn(List<String> productNames) {
+        return productNames.contains(product.getName());
     }
 
     void addOne() {

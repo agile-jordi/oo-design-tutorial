@@ -12,5 +12,7 @@ public abstract class OrderState {
         throw new IllegalStateException();
     }
 
-    abstract CancelLineResponse cancelLine(String productName);
+    CancelLineResponse cancelLine(String productName){
+        return CancelLineResponse.cancellationDenied;
+    }
 }
